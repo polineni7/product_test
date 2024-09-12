@@ -1,0 +1,21 @@
+<div class="container">
+    <h1>Dashboard</h1>
+    <div class="input-section">
+      <input 
+        type="text" 
+        [(ngModel)]="sheetUrl" 
+        placeholder="Enter Google Sheet URL" 
+        (keyup.enter)="loadSheet()"
+      />
+      <button (click)="loadSheet()">Load Sheet</button>
+    </div>
+    <iframe 
+      *ngIf="currentSheetUrl" 
+      [src]="currentSheetUrl" 
+      class="sheet-iframe" 
+      frameborder="0"
+      width="100%" 
+      height="600px">
+    </iframe>
+  </div>
+  

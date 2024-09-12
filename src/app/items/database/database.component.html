@@ -1,0 +1,97 @@
+<div class="container">
+    <div class="content">
+      <div class="sql-header">
+        <h2>SQL Database Script</h2>
+      </div>
+      <textarea class="sql-textarea" readonly>
+  -- Create Database
+  create DATABASE ProductDB;
+  GO
+  
+  -- Use the newly created database
+  USE ProductDB;
+  GO
+  
+  -- 1. Creating Products Table
+  CREATE TABLE Products (
+      ID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+      ProductName NVARCHAR(100) NOT NULL,
+      ProductPrice DECIMAL(18, 2) NOT NULL,
+      Qty INT NOT NULL
+  );
+  
+  -- 2. Creating Category Table with Self-Referencing Relationship
+  CREATE TABLE Category (
+      CategoryID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+      CategoryName NVARCHAR(100) NOT NULL,
+      ParentCategoryID UNIQUEIDENTIFIER NULL,
+      FOREIGN KEY (ParentCategoryID) REFERENCES Category(CategoryID)
+  );
+  
+  -- 3. Creating ProductCategory Table (One-to-Many relationship)
+  CREATE TABLE ProductCategory (
+      ID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+      CategoryID UNIQUEIDENTIFIER NOT NULL,
+      ProductID UNIQUEIDENTIFIER NOT NULL,
+      FOREIGN KEY (CategoryID) REFERENCES Category(CategoryID),
+      FOREIGN KEY (ProductID) REFERENCES Products(ID)
+  );
+  
+  -- Insert records into the Category table with multiple levels of nesting
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Electronics', NULL); -- Root Category
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Mobiles', (SELECT CategoryID FROM Category WHERE CategoryName = 'Electronics')); -- Subcategory
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Smartphones', (SELECT CategoryID FROM Category WHERE CategoryName = 'Mobiles')); -- Sub-Subcategory
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Android Phones', (SELECT CategoryID FROM Category WHERE CategoryName = 'Smartphones')); -- Sub-Sub-Subcategory
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('iOS Phones', (SELECT CategoryID FROM Category WHERE CategoryName = 'Smartphones')); -- Sub-Sub-Subcategory
+  
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Laptops', (SELECT CategoryID FROM Category WHERE CategoryName = 'Electronics'));
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Ultrabooks', (SELECT CategoryID FROM Category WHERE CategoryName = 'Laptops'));
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Gaming Laptops', (SELECT CategoryID FROM Category WHERE CategoryName = 'Laptops'));
+  
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Home Appliances', NULL);
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Kitchen Appliances', (SELECT CategoryID FROM Category WHERE CategoryName = 'Home Appliances'));
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Refrigerators', (SELECT CategoryID FROM Category WHERE CategoryName = 'Kitchen Appliances'));
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Washing Machines', (SELECT CategoryID FROM Category WHERE CategoryName = 'Home Appliances'));
+  
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Furniture', NULL);
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Living Room Furniture', (SELECT CategoryID FROM Category WHERE CategoryName = 'Furniture'));
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Sofas', (SELECT CategoryID FROM Category WHERE CategoryName = 'Living Room Furniture'));
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Beds', (SELECT CategoryID FROM Category WHERE CategoryName = 'Furniture'));
+  
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Fashion', NULL);
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Men s Fashion', (SELECT CategoryID FROM Category WHERE CategoryName = 'Fashion'));
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Women s Fashion', (SELECT CategoryID FROM Category WHERE CategoryName = 'Fashion'));
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Footwear', (SELECT CategoryID FROM Category WHERE CategoryName = 'Fashion'));
+  
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Books', NULL);
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Novels', (SELECT CategoryID FROM Category WHERE CategoryName = 'Books'));
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Science Fiction', (SELECT CategoryID FROM Category WHERE CategoryName = 'Novels'));
+  INSERT INTO Category (CategoryName, ParentCategoryID) VALUES ('Academic Books', (SELECT CategoryID FROM Category WHERE CategoryName = 'Books'));
+  
+  -- Insert Products and map them to the nested categories
+  INSERT INTO Products (ProductName, ProductPrice, Qty) VALUES ('Samsung Galaxy S23', 899.99, 40);
+  INSERT INTO Products (ProductName, ProductPrice, Qty) VALUES ('iPhone 14 Pro Max', 1099.99, 35);
+  INSERT INTO Products (ProductName, ProductPrice, Qty) VALUES ('Dell XPS 15', 1500.00, 25);
+  INSERT INTO Products (ProductName, ProductPrice, Qty) VALUES ('LG Refrigerator', 1200.00, 20);
+  INSERT INTO Products (ProductName, ProductPrice, Qty) VALUES ('Whirlpool Washing Machine', 800.00, 15);
+  INSERT INTO Products (ProductName, ProductPrice, Qty) VALUES ('Leather Sofa', 900.00, 10);
+  INSERT INTO Products (ProductName, ProductPrice, Qty) VALUES ('King Size Bed', 1200.00, 8);
+  INSERT INTO Products (ProductName, ProductPrice, Qty) VALUES ('Nike Running Shoes', 120.00, 60);
+  INSERT INTO Products (ProductName, ProductPrice, Qty) VALUES ('Harry Potter Book Set', 90.00, 100);
+  INSERT INTO Products (ProductName, ProductPrice, Qty) VALUES ('The Hobbit', 25.00, 75);
+  
+  -- Map products to appropriate categories
+  INSERT INTO ProductCategory (CategoryID, ProductID) VALUES ((SELECT CategoryID FROM Category WHERE CategoryName = 'Android Phones'), (SELECT ID FROM Products WHERE ProductName = 'Samsung Galaxy S23'));
+  INSERT INTO ProductCategory (CategoryID, ProductID) VALUES ((SELECT CategoryID FROM Category WHERE CategoryName = 'iOS Phones'), (SELECT ID FROM Products WHERE ProductName = 'iPhone 14 Pro Max'));
+  INSERT INTO ProductCategory (CategoryID, ProductID) VALUES ((SELECT CategoryID FROM Category WHERE CategoryName = 'Laptops'), (SELECT ID FROM Products WHERE ProductName = 'Dell XPS 15'));
+  INSERT INTO ProductCategory (CategoryID, ProductID) VALUES ((SELECT CategoryID FROM Category WHERE CategoryName = 'Refrigerators'), (SELECT ID FROM Products WHERE ProductName = 'LG Refrigerator'));
+  INSERT INTO ProductCategory (CategoryID, ProductID) VALUES ((SELECT CategoryID FROM Category WHERE CategoryName = 'Washing Machines'), (SELECT ID FROM Products WHERE ProductName = 'Whirlpool Washing Machine'));
+  INSERT INTO ProductCategory (CategoryID, ProductID) VALUES ((SELECT CategoryID FROM Category WHERE CategoryName = 'Sofas'), (SELECT ID FROM Products WHERE ProductName = 'Leather Sofa'));
+  INSERT INTO ProductCategory (CategoryID, ProductID) VALUES ((SELECT CategoryID FROM Category WHERE CategoryName = 'Beds'), (SELECT ID FROM Products WHERE ProductName = 'King Size Bed'));
+  INSERT INTO ProductCategory (CategoryID, ProductID) VALUES ((SELECT CategoryID FROM Category WHERE CategoryName = 'Footwear'), (SELECT ID FROM Products WHERE ProductName = 'Nike Running Shoes'));
+  INSERT INTO ProductCategory (CategoryID, ProductID) VALUES ((SELECT CategoryID FROM Category WHERE CategoryName = 'Science Fiction'), (SELECT ID FROM Products WHERE ProductName = 'The Hobbit'));
+  INSERT INTO ProductCategory (CategoryID, ProductID) VALUES ((SELECT CategoryID FROM Category WHERE CategoryName = 'Novels'), (SELECT ID FROM Products WHERE ProductName = 'Harry Potter Book Set'));
+</textarea>
+</div>
+<button class="fab" (click)="copyToClipboard()">Copy</button>
+</div>

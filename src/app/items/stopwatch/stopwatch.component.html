@@ -1,0 +1,22 @@
+<div class="stopwatch-container">
+    <h1 class="title"> Stopwatch</h1>
+    <div class="timer-display">
+      <span class="time">{{ formatTime(elapsedTime) }}</span>
+    </div>
+    <div class="controls">
+      <button class="control-button" (click)="start()">Start</button>
+      <button class="control-button" (click)="stop()">Stop</button>
+      <button class="control-button" (click)="reset()">Reset</button>
+    </div>
+    <div class="alert-settings">
+      <label for="alert-hours">Alert Hours:</label>
+      <select id="alert-hours" [(ngModel)]="alertHours" (change)="updateAlert()">
+        <option *ngFor="let h of hoursArray" [value]="h">{{ h }}</option>
+      </select>
+      <label for="alert-minutes">Alert Minutes:</label>
+      <select id="alert-minutes" [(ngModel)]="alertMinutes" (change)="updateAlert()">
+        <option *ngFor="let m of minutesArray" [value]="m">{{ m }}</option>
+      </select>
+    </div>
+  </div>
+  

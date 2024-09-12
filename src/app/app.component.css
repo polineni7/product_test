@@ -1,0 +1,119 @@
+/* app.component.css */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f5f5f5; /* Light gray for overall background */
+}
+
+.top-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #007bff; /* Primary blue */
+    color: #ffffff; /* White text for contrast */
+    padding: 0.5rem 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%; /* Ensure it stretches across the width */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.top-nav {
+    flex-grow: 1;
+    margin-left: 2rem;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    position: relative;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.nav-link {
+    color: #ffffff; /* White text for links */
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s, color 0.3s;
+    display: block; /* Ensure links take full width for easier clicking */
+}
+
+.nav-link:hover {
+    background-color: #0056b3; /* Darker blue for hover */
+}
+
+.sub-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff; /* White for submenu background */
+    color: #333333; /* Dark gray text for submenu items */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    min-width: 150px; /* Set a minimum width for better display */
+}
+
+.nav-item:hover .sub-menu {
+    display: block;
+}
+
+.sub-menu-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: #333333; /* Dark gray for submenu links */
+    border-radius: 0.25rem;
+    transition: background-color 0.3s;
+}
+
+.sub-menu-link:hover {
+    background-color: #f0f0f0; /* Light gray for submenu item hover */
+}
+
+.logout-btn {
+    background-color: #dc3545; /* Red for logout button */
+    color: #ffffff; /* White text */
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #c82333; /* Darker red for hover */
+}
+
+.main-content {
+    padding: 1rem;
+    background-color: #ffffff; /* White background for content */
+    color: #333333; /* Dark gray text for readability */
+    border-radius: 0.5rem; /* Rounded corners for content */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow for elevation */
+    margin-top: 0.5rem; /* Space below the top menu */
+    flex-grow: 1;
+}

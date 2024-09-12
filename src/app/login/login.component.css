@@ -1,0 +1,119 @@
+/* Background colors */
+.bg-main {
+    background-color: #f7f9fc; /* Very light gray for a clean, fresh look */
+}
+
+.bg-card {
+    background-color: #ffffff; /* White for the login card */
+}
+
+/* Text colors */
+.text-heading {
+    color: #2d3748; /* Dark gray for headings for strong contrast */
+}
+
+.text-body {
+    color: #4a5568; /* Medium gray for body text */
+}
+
+/* Hover and focus states */
+.hover\:bg-gray-200:hover {
+    background-color: #edf2f7; /* Very light gray for hover effect */
+}
+
+.focus\:ring-primary:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); /* Light blue shadow for focus */
+}
+
+/* Border-radius for consistency */
+.border-radius-sm {
+    border-radius: 0.25rem; /* Small radius for subtle rounding */
+}
+
+.border-radius-md {
+    border-radius: 0.5rem; /* Medium radius for more noticeable rounding */
+}
+
+.border-radius-lg {
+    border-radius: 0.75rem; /* Larger radius for pronounced rounding */
+}
+
+/* General button styles */
+.btn-primary {
+    border-radius: 0.5rem; /* Medium radius for consistency */
+    padding: 0.75rem 1.5rem; /* Adequate padding */
+    background-color: #3182ce; /* Primary blue background */
+    color: #ffffff; /* White text */
+    border: none; /* Remove default border */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transitions */
+}
+
+.btn-primary:hover {
+    background-color: #2b6cb0; /* Darker blue for button hover */
+}
+
+.btn-primary:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); /* Light blue shadow on focus */
+}
+
+/* Input fields */
+.input-field {
+    border-radius: 0.5rem; /* Medium border radius */
+    padding: 0.75rem 7rem; /* Comfortable padding */
+    border: 1px solid #e2e8f0; /* Light gray border */
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1); /* Light shadow */
+    width: 100%; /* Full width for consistency */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    text-align: center; /* Center-align text inside input */
+}
+
+
+.input-field:focus {
+    border-color: #3182ce; /* Blue border on focus */
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25); /* Enhanced shadow on focus */
+}
+
+/* Login container */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #f7f9fc; /* Light background color */
+    padding: 2rem;
+}
+
+.login-card {
+    background-color: #ffffff; /* White background for the card */
+    border-radius: 0.75rem; /* Larger border radius for a soft card */
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    padding: 2.5rem; /* Increased padding for a spacious feel */
+    width: 100%;
+    max-width: 400px; /* Max width for the card */
+    margin: 1rem; /* Margin for spacing */
+}
+
+.login-header {
+    margin-bottom: 1.5rem; /* Space below the header */
+    text-align: center;
+    color: #2d3748; /* Dark gray for heading */
+    font-size: 2rem; /* Larger font size for readability */
+    font-weight: 600; /* Slightly bold for emphasis */
+}
+
+.login-footer {
+    margin-top: 1.5rem; /* Space above the footer */
+    text-align: center;
+    color: #4a5568; /* Medium gray for footer text */
+}
+
+.login-footer a {
+    color: #3182ce; /* Primary blue for links */
+    text-decoration: none;
+}
+
+.login-footer a:hover {
+    text-decoration: underline; /* Underline on hover for links */
+}

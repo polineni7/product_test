@@ -1,0 +1,31 @@
+<div class="min-h-screen flex items-center justify-center bg-main text-body">
+    <div class="w-full max-w-md p-8 space-y-8 rounded-lg bg-card shadow-lg border border-gray-200">
+        <div class="text-center">
+            <h2 class="text-3xl font-semibold text-heading">Sign In</h2>
+        </div>
+        <form (ngSubmit)="onLogin()" class="space-y-6">
+            <div class="rounded-md shadow-sm">
+                <div>
+                    <label for="username" class="sr-only">Username</label>
+                    <input id="username" name="username" type="text" required [(ngModel)]="username"
+                        class="input-field bg-main text-body placeholder-gray-500 focus:ring-primary focus:border-primary sm:text-sm"
+                        placeholder="Username">
+                </div>
+                <div class="mt-4">
+                    <label for="password" class="sr-only">Password</label>
+                    <input id="password" name="password" type="password" required [(ngModel)]="password"
+                        class="input-field bg-main text-body placeholder-gray-500 focus:ring-primary focus:border-primary sm:text-sm"
+                        placeholder="Password">
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn-primary w-full py-3 text-xl font-semibold rounded-lg">
+                    Sign In
+                </button>
+            </div>
+        </form>
+        <div class="login-footer">
+            <p>New here? <a href="#" class="text-primary hover:text-gray-700">Create an account</a></p>
+        </div>
+    </div>
+</div>
